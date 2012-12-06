@@ -18,7 +18,6 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('json', 'Concatenating JSON into JS', function() {
     var files = grunt.file.expandFiles(this.file.src);
-    console.log(this);
     var json = grunt.helper('concat-json', files, this.data);
     grunt.file.write(this.file.dest, json);
     grunt.log.write('File "' + this.file.dest + '" created.');
