@@ -1,0 +1,37 @@
+{
+  "name": "grunt-json",
+  "description": "Compiles JSON files into Javascript",
+  "version": "0.1.0",
+  "homepage": "https://github.com/wilsonpage/grunt-json",
+  "author": {
+    "name": "Wilson Page",
+    "email": "wilsonpage@me.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wilsonpage/grunt-json.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wilsonpage/grunt-json/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/wilsonpage/grunt-json/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "grunt.js",
+  "bin": "bin/grunt-json",
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.17"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
