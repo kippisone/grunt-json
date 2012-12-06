@@ -16,12 +16,12 @@ module.exports = function(grunt) {
   // TASKS
   // ==========================================================================
 
-  grunt.registerMultiTask('json', 'Your task description goes here.', function() {
+  grunt.registerMultiTask('json', 'Concatenating JSON into JS', function() {
     var files = grunt.file.expandFiles(this.file.src);
-
-    var json = grunt.helper('concat-json', files, { namespace: 'myjson' });
+    console.log(this);
+    var json = grunt.helper('concat-json', files, this.data);
     grunt.file.write(this.file.dest, json);
-    //grunt.log.write(grunt.helper('json'));
+    grunt.log.write('File "' + this.file.dest + '" created.');
   });
 
   // ==========================================================================
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 
     return 'var ' + namespace + '={};' + files.map(function(filepath) {
       basename = path.basename(filepath, '.json');
-      return '\n' + options.namespace + '["' + basename + '"] = ' + grunt.task.directive(filepath, grunt.file.read).replace(/[ \t\r\n]+/g,"") + ';';
+      return '\n' + options.namespace + '["' + basename + '"] = ' + grunt.task.directive(filepath, grunt.file.read) + ';';
     }).join('');
   });
 };

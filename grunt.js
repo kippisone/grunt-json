@@ -13,7 +13,7 @@ module.exports = function(grunt) {
       tasks: 'default'
     },
     json: {
-      dist: {
+      files: {
         src: ['test/**/*.json'],
         dest: 'test/json.js'
       }
