@@ -25,7 +25,7 @@ exports['json'] = {
     // setup here
     done();
   },
-  'helper': function(test) {
+  doTest: function(test) {
     test.expect(1);
     // tests here
     test.equal(grunt.helper('json'), 'json!!!', 'should return the correct value.');
