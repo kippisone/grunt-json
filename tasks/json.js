@@ -6,8 +6,19 @@
  * Licensed under the MIT license.
  */
 
-module.exports = function(grunt) {
+"use strict";
+
+module.exports = function (grunt) {
   var path = require('path');
+  var concatJson = function (files, options) {
+    var namespace = options && options.namespace || 'myjson';
+    var basename;
+
+    return 'var ' + namespace + '={};' + files.map(function (filepath) {
+      basename = path.basename(filepath, '.json');
+      return '\n' + namespace + '["' + basename + '"] = ' + grunt.file.read(filepath) + ';';
+    }).join('');
+  };
 
   // Please see the grunt documentation for more information regarding task and
   // helper creation: https://github.com/gruntjs/grunt/blob/master/docs/toc.md
@@ -16,24 +27,23 @@ module.exports = function(grunt) {
   // TASKS
   // ==========================================================================
 
-  grunt.registerMultiTask('json', 'Concatenating JSON into JS', function() {
-    var files = grunt.file.expandFiles(this.file.src);
-    var json = grunt.helper('concat-json', files, this.data);
-    grunt.file.write(this.file.dest, json);
-    grunt.log.write('File "' + this.file.dest + '" created.');
-  });
+  grunt.registerMultiTask('json', 'Concatenating JSON into JS', function () {
+    var data = this.data;
+    grunt.util.async.forEachSeries(this.files, function(f, nextFileObj) {
+      var destFile = f.dest;
+      var files = f.src.filter(function (filepath) {
+        // Warn on and remove invalid source files (if nonull was set).
+        if (!grunt.file.exists(filepath)) {
+          grunt.log.warn('Source file "' + filepath + '" not found.');
+          return false;
+        } else {
+          return true;
+        }
+      });
 
-  // ==========================================================================
-  // HELPERS
-  // ==========================================================================
-
-  grunt.registerHelper('concat-json', function(files, options) {
-    var namespace = options && options.namespace || 'myjson';
-    var basename;
-
-    return 'var ' + namespace + '={};' + files.map(function(filepath) {
-      basename = path.basename(filepath, '.json');
-      return '\n' + options.namespace + '["' + basename + '"] = ' + grunt.task.directive(filepath, grunt.file.read) + ';';
-    }).join('');
+      var json = concatJson(files, data);
+      grunt.file.write(destFile, json);
+      grunt.log.write('File "' + destFile + '" created.');
+    });
   });
 };
