@@ -28,7 +28,7 @@ The namespace in which the json data will be assigned.
 Type: `Boolean`
 Default: false
 
-Include the full path of the file and the extension. By default only the file name is used as the key value.
+Includes the full path of the file and the extension. By default only the file name is used as the key value.
 
 #### processName
 Type: `function`
