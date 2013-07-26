@@ -20,13 +20,15 @@ module.exports = function (grunt) {
         var namespace = options && options.namespace || 'myjson';               // Allows the user to customize the namespace but will have a default if one is not given.
         var includePath = options && options.includePath || false;              // Allows the user to include the full path of the file and the extension.
         var processName = options.processName || defaultProcessNameFunction;    // Allows the user to modify the path/name that will be used as the identifier.
+        var initializeNamespace = options && (options.initializeNamespace || options.initializeNamespace === undefined) ? 'var ' + namespace + ' = ' + namespace + ' || {};\n' : ''
+        // Allows the user to add or exclude the `var namespace` on the first line
         var basename;
         var filename;
 
-        return 'var ' + namespace + ' = ' + namespace + ' || {};' + files.map(function (filepath) {
+        return initializeNamespace + files.map(function (filepath) {
             basename = path.basename(filepath, '.json');
             filename = (includePath) ? processName(filepath) : processName(basename);
-            return '\n' + namespace + '["' + filename + '"] = ' + grunt.file.read(filepath) + ';';
+            return namespace + '["' + filename + '"] = ' + grunt.file.read(filepath) + ';';
         }).join('');
     };
 
