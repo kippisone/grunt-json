@@ -20,13 +20,22 @@ module.exports = function (grunt) {
         var namespace = options && options.namespace || 'myjson';               // Allows the user to customize the namespace but will have a default if one is not given.
         var includePath = options && options.includePath || false;              // Allows the user to include the full path of the file and the extension.
         var processName = options.processName || defaultProcessNameFunction;    // Allows the user to modify the path/name that will be used as the identifier.
+        var commonjs = options.commonjs || false;
         var basename;
         var filename;
+        var NEW_LINE_REGEX = /\r*\n/g;
 
-        return 'var ' + namespace + ' = ' + namespace + ' || {};' + files.map(function (filepath) {
+        var varDeclecation;
+        if (commonjs) {
+            varDeclecation = 'var ' + namespace + ' = {};\nmodule.exports = ' + namespace + ';';
+        } else {
+            varDeclecation = (namespace.indexOf('.') === -1 ? 'var ' : '') + namespace + ' = ' + namespace + ' || {};'
+        }
+
+        return varDeclecation + files.map(function (filepath) {
             basename = path.basename(filepath, '.json');
             filename = (includePath) ? processName(filepath) : processName(basename);
-            return '\n' + namespace + '["' + filename + '"] = ' + grunt.file.read(filepath) + ';';
+            return '\n' + namespace + '["' + filename + '"] = ' + grunt.file.read(filepath).replace(NEW_LINE_REGEX, '') + ';';
         }).join('');
     };
 
