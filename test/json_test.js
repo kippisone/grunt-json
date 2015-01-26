@@ -41,5 +41,14 @@ exports['json'] = {
     test.equal(actual, expected, 'should concat json and export');
 
     test.done();
-  }
+  },
+  global_namespace: function (test) {
+    test.expect(1);
+    var actual = grunt.file.read('tmp/global_namespace_options.js');
+    var expected = grunt.file.read('test/expected/global_namespace_options.js');
+    test.equal(actual, expected, 'should concat json and export');
+
+    test.done();
+  },
+
 };

@@ -23,6 +23,13 @@ module.exports = function (grunt) {
         },
         src: 'test/fixtures/**/*.json',
         dest: 'tmp/common_js_options.js'
+      },
+      global_namespace_options: {
+        options: {
+          namespace: "my.global"
+        },
+        src: 'test/fixtures/**/*.json',
+        dest: 'tmp/global_namespace_options.js'
       }
     },
 
