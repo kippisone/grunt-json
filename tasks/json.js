@@ -23,7 +23,7 @@ module.exports = function (grunt) {
         var basename;
         var filename;
 
-        return 'var ' + namespace + ' = ' + namespace + ' || {};' + files.map(function (filepath) {
+        return (namespace.indexOf('.') === -1 ? 'var ' : '') + namespace + ' = ' + namespace + ' || {};' + files.map(function (filepath) {
             basename = path.basename(filepath, '.json');
             filename = (includePath) ? processName(filepath) : processName(basename);
             return '\n' + namespace + '["' + filename + '"] = ' + grunt.file.read(filepath) + ';';
