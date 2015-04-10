@@ -25,10 +25,30 @@ exports['json'] = {
     // setup here
     done();
   },
-  doTest: function(test) {
+  common_js_options: function (test) {
     test.expect(1);
-    // tests here
-    test.equal(grunt.helper('json'), 'json!!!', 'should return the correct value.');
+
+    var actual = grunt.file.read('tmp/common_js_options.js');
+    var expected = grunt.file.read('test/expected/common_js_option.js');
+    test.equal(actual, expected, 'should concat json and export');
+
     test.done();
-  }
+  },
+  default_options: function (test) {
+    test.expect(1);
+    var actual = grunt.file.read('tmp/default_options.js');
+    var expected = grunt.file.read('test/expected/default_options.js');
+    test.equal(actual, expected, 'should concat json and export');
+
+    test.done();
+  },
+  global_namespace: function (test) {
+    test.expect(1);
+    var actual = grunt.file.read('tmp/global_namespace_options.js');
+    var expected = grunt.file.read('test/expected/global_namespace_options.js');
+    test.equal(actual, expected, 'should concat json and export');
+
+    test.done();
+  },
+
 };
