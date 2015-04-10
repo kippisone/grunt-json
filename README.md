@@ -44,6 +44,12 @@ options: {
 }
 ```
 
+#commonjs
+Type: `Boolean`
+Default: false
+
+Exports the namespace which the json has been assigned too. ```module.exports =```
+
 ### Usage Examples
 
 ```js
@@ -71,5 +77,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
  * 2013-05-01   v0.1.2   First commit.
 
 ## License
-Copyright (c) 2012 Wilson Page  
+Copyright (c) 2012 Wilson Page
 Licensed under the MIT license.
