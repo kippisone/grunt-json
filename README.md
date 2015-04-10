@@ -73,6 +73,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+ * 2015-04-10   v0.1.4  Do not add a var keyword if namespace contains a dot.
  * 2013-07-02   v0.1.3   Added processName functionality. Added includePath condition. Updated documentation. Added a way to safely add to the namespace if it already exists and not overwrite.
  * 2013-05-01   v0.1.2   First commit.
 

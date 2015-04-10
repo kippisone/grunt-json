@@ -3,6 +3,7 @@
  * https://github.com/wilsonpage/grunt-json
  *
  * Copyright (c) 2012 Wilson Page
+ * 
  * Licensed under the MIT license.
  */
 
@@ -29,7 +30,7 @@ module.exports = function (grunt) {
         if (commonjs) {
             varDeclecation = 'var ' + namespace + ' = {};\nmodule.exports = ' + namespace + ';';
         } else {
-            varDeclecation = (namespace.indexOf('.') === -1 ? 'var ' : '') + namespace + ' = ' + namespace + ' || {};'
+            varDeclecation = (namespace.indexOf('.') === -1 ? 'var ' : '') + namespace + ' = ' + namespace + ' || {};';
         }
 
         return varDeclecation + files.map(function (filepath) {
