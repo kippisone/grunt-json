@@ -40,7 +40,7 @@ module.exports = function (grunt) {
       files: [
         'Gruntfile.js',
         'tasks/**/*.js',
-        'test/**/*.js'
+        'test/**/*_test.js'
       ],
       options: {
         jshintrc: '.jshintrc'
