@@ -21,6 +21,7 @@ module.exports = function (grunt) {
         var namespace = options && options.namespace || 'myjson';               // Allows the user to customize the namespace but will have a default if one is not given.
         var includePath = options && options.includePath || false;              // Allows the user to include the full path of the file and the extension.
         var processName = options.processName || defaultProcessNameFunction;    // Allows the user to modify the path/name that will be used as the identifier.
+        var preserveNewlines = options.preserveNewlines || false;               // Allows the user to preserve newlines.
         var commonjs = options.commonjs || false;
         var basename;
         var filename;
@@ -31,6 +32,10 @@ module.exports = function (grunt) {
             varDeclecation = 'var ' + namespace + ' = {};\nmodule.exports = ' + namespace + ';';
         } else {
             varDeclecation = (namespace.indexOf('.') === -1 ? 'var ' : '') + namespace + ' = ' + namespace + ' || {};';
+        }
+
+        if (options.preserveNewlines === true) {
+            NEW_LINE_REGEX = '';
         }
 
         return varDeclecation + files.map(function (filepath) {

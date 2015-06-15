@@ -30,6 +30,12 @@ Default: false
 
 Includes the full path of the file and the extension. By default only the file name is used as the key value.
 
+#### preserveNewline
+Type: `Boolean`
+Default: false
+
+Keeps newlines in concatenated js files
+
 #### processName
 Type: `function`
 Default: null
