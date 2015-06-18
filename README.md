@@ -44,7 +44,22 @@ options: {
 }
 ```
 
-#commonjs
+#### processContent
+Type: `function`
+Default: null
+
+This option accepts a function which takes one argument (content) and returns a modified content of the JSON file. The example below appends a custom attribute to the JSON file content.
+
+```js
+options: {
+  processContent: function(content) {
+    content.myVar = 'myVal';
+    return content;
+  }
+}
+```
+
+####commonjs
 Type: `Boolean`
 Default: false
 

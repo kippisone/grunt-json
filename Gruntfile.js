@@ -30,6 +30,16 @@ module.exports = function (grunt) {
         },
         src: 'test/fixtures/**/*.json',
         dest: 'tmp/global_namespace_options.js'
+      },
+      process_content_options: {
+        options: {
+          processContent: function(content) {
+            content.myVar = 'myVal';
+            return content;
+          }
+        },
+        src: 'test/fixtures/**/*.json',
+        dest: 'tmp/process_content_options.js'
       }
     },
 
