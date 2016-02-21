@@ -1,3 +1,7 @@
+[![NPM version](https://badge.fury.io/js/grunt-json.png)](http://badge.fury.io/js/grunt-json)
+[![Dependency Status](https://david-dm.org/Andifeind/grunt-json/status.svg)](https://david-dm.org/Andifeind/grunt-json)
+[![devDependency Status](https://david-dm.org/Andifeind/grunt-json/dev-status.svg)](https://david-dm.org/Andifeind/grunt-json#info=devDependencies)
+
 # grunt-json
 
 Compiles JSON files into Javascript
