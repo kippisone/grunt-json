@@ -1,7 +1,7 @@
 {
   "name": "grunt-json",
   "description": "Compiles JSON files into Javascript",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "homepage": "https://github.com/wilsonpage/grunt-json",
   "author": "Wilson Page <wilsonpage@me.com>",
   "contributors": [
