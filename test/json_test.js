@@ -50,5 +50,20 @@ exports['json'] = {
 
     test.done();
   },
+  process_content_options: function (test) {
+    test.expect(1);
+    var actual = grunt.file.read('tmp/process_content_options.js');
+    var expected = grunt.file.read('test/expected/process_content_options.js');
+    test.equal(actual, expected, 'should concat json and export');
 
+    test.done();
+  },
+  pretty_options: function (test) {
+    test.expect(1);
+    var actual = grunt.file.read('tmp/pretty_options.js');
+    var expected = grunt.file.read('test/expected/pretty_options.js');
+    test.equal(actual, expected, 'should concat json and export');
+
+    test.done();
+  }
 };

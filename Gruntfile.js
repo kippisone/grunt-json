@@ -17,6 +17,14 @@ module.exports = function (grunt) {
         src: 'test/fixtures/**/*.json',
         dest: 'tmp/default_options.js'
       },
+      pretty_options: {
+        options: {
+          namespace: "pretty_json",
+          pretty: true
+        },
+        src: 'test/fixtures/**/*.json',
+        dest: 'tmp/pretty_options.js'
+      },
       common_js_options: {
         options: {
           commonjs: true
@@ -30,6 +38,16 @@ module.exports = function (grunt) {
         },
         src: 'test/fixtures/**/*.json',
         dest: 'tmp/global_namespace_options.js'
+      },
+      process_content_options: {
+        options: {
+          processContent: function(content) {
+            content.myVar = 'myVal';
+            return content;
+          }
+        },
+        src: 'test/fixtures/**/*.json',
+        dest: 'tmp/process_content_options.js'
       }
     },
 

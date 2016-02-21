@@ -30,11 +30,11 @@ Default: false
 
 Includes the full path of the file and the extension. By default only the file name is used as the key value.
 
-#### preserveNewline
+#### pretty
 Type: `Boolean`
 Default: false
 
-Keeps newlines in concatenated js files
+Outputs json in a readable way
 
 #### processName
 Type: `function`
@@ -50,7 +50,22 @@ options: {
 }
 ```
 
-#commonjs
+#### processContent
+Type: `function`
+Default: null
+
+This option accepts a function which takes one argument (content) and returns a modified content of the JSON file. The example below appends a custom attribute to the JSON file content.
+
+```js
+options: {
+  processContent: function(content) {
+    content.myVar = 'myVal';
+    return content;
+  }
+}
+```
+
+####commonjs
 Type: `Boolean`
 Default: false
 

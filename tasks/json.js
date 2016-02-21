@@ -12,20 +12,20 @@
 module.exports = function (grunt) {
     var path = require('path');
 
-    var defaultProcessNameFunction = function (name) {
-        return name;
+    var pass = function (value) {
+        return value;
     };
 
-    var concatJson = function (files, data) {
-        var options = data.options || {};
-        var namespace = options.namespace || 'myjson';               // Allows the user to customize the namespace but will have a default if one is not given.
-        var includePath = options.includePath || false;              // Allows the user to include the full path of the file and the extension.
-        var processName = options.processName || defaultProcessNameFunction;    // Allows the user to modify the path/name that will be used as the identifier.
-        var preserveNewlines = options.preserveNewlines || false;               // Allows the user to preserve newlines.
+    var concatJson = function (files, options) {
+        var namespace = options && options.namespace || 'myjson';    // Allows the user to customize the namespace but will have a default if one is not given.
+        var includePath = options && options.includePath || false;   // Allows the user to include the full path of the file and the extension.
+        var processName = options.processName || pass;               // Allows the user to modify the path/name that will be used as the identifier.
+        var processContent = options.processContent || pass;         // Allows the user to process JSON file content on the fly
         var commonjs = options.commonjs || false;
+        var pretty = !!options.pretty;
         var basename;
         var filename;
-        var NEW_LINE_REGEX = /\r*\n/g;
+        var content;
 
         var varDeclecation;
         if (commonjs) {
@@ -35,14 +35,11 @@ module.exports = function (grunt) {
         }
 
         return varDeclecation + files.map(function (filepath) {
-            var jsonStr = grunt.file.read(filepath);
-            if (!options.preserveNewlines) {
-                jsonStr = jsonStr.replace(NEW_LINE_REGEX, '');
-            }
-                        
             basename = path.basename(filepath, '.json');
             filename = (includePath) ? processName(filepath) : processName(basename);
-            return '\n' + namespace + '["' + filename + '"] = ' + jsonStr + ';';
+            content = processContent(grunt.file.readJSON(filepath));
+            content = JSON.stringify(content, null, pretty ? 2 : 0);
+            return '\n' + namespace + '["' + filename + '"] = ' + content + ';';
         }).join('');
     };
 
@@ -54,7 +51,7 @@ module.exports = function (grunt) {
     // ==========================================================================
 
     grunt.registerMultiTask('json', 'Concatenating JSON into JS', function () {
-        var data = this.data;
+        var options = this.options();
         grunt.util.async.forEachSeries(this.files, function (f, nextFileObj) {
             var destFile = f.dest;
             var files = f.src.filter(function (filepath) {
@@ -67,7 +64,7 @@ module.exports = function (grunt) {
                 }
             });
 
-            var json = concatJson(files, data);
+            var json = concatJson(files, options);
             grunt.file.write(destFile, json);
             grunt.log.write('File "' + destFile + '" created.');
         });
