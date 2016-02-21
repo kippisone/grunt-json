@@ -93,12 +93,14 @@ json: {
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][grunt].
 
 ## Release History
-
+ * 2016-02-21   v0.2.0   Added pretty option,
+                         Added processContent option (Thanks to ducin for the pull request)
  * 2015-04-10   v0.1.5   Do not add a var keyword if namespace contains a dot.
- * 2015-04-10   v0.1.4   Now maintained by Andi Oxidant.
+ * 2015-04-10   v0.1.4   Now maintained by Andifeind.
  * 2013-07-02   v0.1.3   Added processName functionality. Added includePath condition. Updated documentation. Added a way to safely add to the namespace if it already exists and not overwrite.
  * 2013-05-01   v0.1.2   First commit.
 
 ## License
+Copyright (c) 2015 Andifeind
 Copyright (c) 2012 Wilson Page
 Licensed under the MIT license.
