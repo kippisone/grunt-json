@@ -4,6 +4,12 @@
   "version": "0.1.5",
   "homepage": "https://github.com/wilsonpage/grunt-json",
   "author": "Wilson Page <wilsonpage@me.com>",
+  "contributors": [
+    {
+      "name": "Andifeind",
+      "email": "andifeind@noname-media.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/wilsonpage/grunt-json.git"
