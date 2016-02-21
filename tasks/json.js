@@ -34,14 +34,15 @@ module.exports = function (grunt) {
             varDeclecation = (namespace.indexOf('.') === -1 ? 'var ' : '') + namespace + ' = ' + namespace + ' || {};';
         }
 
-        if (options.preserveNewlines === true) {
-            NEW_LINE_REGEX = '';
-        }
-
         return varDeclecation + files.map(function (filepath) {
+            var jsonStr = grunt.file.read(filepath);
+            if (!options.preserveNewlines) {
+                jsonStr = jsonStr.replace(NEW_LINE_REGEX, '');
+            }
+                        
             basename = path.basename(filepath, '.json');
             filename = (includePath) ? processName(filepath) : processName(basename);
-            return '\n' + namespace + '["' + filename + '"] = ' + grunt.file.read(filepath).replace(NEW_LINE_REGEX, '') + ';';
+            return '\n' + namespace + '["' + filename + '"] = ' + jsonStr + ';';
         }).join('');
     };
 
