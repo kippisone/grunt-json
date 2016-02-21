@@ -17,9 +17,9 @@ module.exports = function (grunt) {
     };
 
     var concatJson = function (files, data) {
-        var options = data.options;
-        var namespace = options && options.namespace || 'myjson';               // Allows the user to customize the namespace but will have a default if one is not given.
-        var includePath = options && options.includePath || false;              // Allows the user to include the full path of the file and the extension.
+        var options = data.options || {};
+        var namespace = options.namespace || 'myjson';               // Allows the user to customize the namespace but will have a default if one is not given.
+        var includePath = options.includePath || false;              // Allows the user to include the full path of the file and the extension.
         var processName = options.processName || defaultProcessNameFunction;    // Allows the user to modify the path/name that will be used as the identifier.
         var commonjs = options.commonjs || false;
         var basename;
